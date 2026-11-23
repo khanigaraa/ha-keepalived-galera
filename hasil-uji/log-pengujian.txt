@@ -1,0 +1,738 @@
+KUTIPAN LOG HASIL PENGUJIAN
+C.1 Log Pengujian Failover Kegagalan Node
+Lampiran ini memuat kutipan log hasil pengujian. Baris respons yang berulang dan tidak membawa informasi baru dihilangkan, dan setiap penghilangan ditandai beserta jumlah barisnya. Bagian yang dipertahankan mencakup awal dan akhir setiap berkas log, seluruh baris di sekitar peristiwa peralihan layanan, serta setiap baris yang bukan merupakan respons rutin. Berkas log utuh tersimpan pada masing-masing node dan dapat ditunjukkan apabila diperlukan.
+Pengujian dilakukan sebanyak lima kali dengan mematikan node master secara mendadak. Pengukuran dilakukan dari node3 menggunakan perintah:
+ping -i 0.2 -D 10.200.0.100 | tee /root/failover_pX.log
+Kegagalan dipicu pada node1 menggunakan:
+echo b > /proc/sysrq-trigger
+Rekapitulasi hasil perhitungan:
+Percobaan p1: 3.32 detik
+Percobaan p2: 3.32 detik
+Percobaan p3: 3.17 detik
+Percobaan p4: 3.32 detik
+Percobaan p5: 3.11 detik
+C.1.1 Log Percobaan Pertama
+	cat /root/failover_p1.log
+Hasil:
+PING 10.200.0.100 (10.200.0.100) 56(84) bytes of data.
+[1786075455.018390] 64 bytes from 10.200.0.100: icmp_seq=1 ttl=64 time=28.9 ms
+[1786075455.190847] 64 bytes from 10.200.0.100: icmp_seq=2 ttl=64 time=0.887 ms
+[ ... 41 baris respons normal dihilangkan ... ]
+[1786075463.675329] 64 bytes from 10.200.0.100: icmp_seq=44 ttl=64 time=15.1 ms
+[1786075463.861658] 64 bytes from 10.200.0.100: icmp_seq=45 ttl=64 time=0.914 ms
+[1786075464.096185] 64 bytes from 10.200.0.100: icmp_seq=46 ttl=64 time=35.1 ms
+[1786075464.262445] 64 bytes from 10.200.0.100: icmp_seq=47 ttl=64 time=0.879 ms
+[1786075467.585057] 64 bytes from 10.200.0.100: icmp_seq=63 ttl=64 time=0.965 ms
+[1786075467.786067] 64 bytes from 10.200.0.100: icmp_seq=64 ttl=64 time=1.51 ms
+[1786075467.988961] 64 bytes from 10.200.0.100: icmp_seq=65 ttl=64 time=3.48 ms
+[1786075468.187099] 64 bytes from 10.200.0.100: icmp_seq=66 ttl=64 time=0.795 ms
+[ ... 89 baris respons normal dihilangkan ... ]
+[1786075486.333221] 64 bytes from 10.200.0.100: icmp_seq=156 ttl=64 time=1.14 ms
+[1786075486.533636] 64 bytes from 10.200.0.100: icmp_seq=157 ttl=64 time=0.956 ms
+C.1.2 Log Percobaan Kedua
+cat /root/failover_p2.log
+Hasil
+PING 10.200.0.100 (10.200.0.100) 56(84) bytes of data.
+[1786075603.619664] 64 bytes from 10.200.0.100: icmp_seq=1 ttl=64 time=0.982 ms
+[1786075603.820152] 64 bytes from 10.200.0.100: icmp_seq=2 ttl=64 time=1.04 ms
+[ ... 43 baris respons normal dihilangkan ... ]
+[1786075612.673672] 64 bytes from 10.200.0.100: icmp_seq=46 ttl=64 time=1.00 ms
+[1786075612.874645] 64 bytes from 10.200.0.100: icmp_seq=47 ttl=64 time=1.62 ms
+[1786075613.079567] 64 bytes from 10.200.0.100: icmp_seq=48 ttl=64 time=5.55 ms
+[1786075613.280896] 64 bytes from 10.200.0.100: icmp_seq=49 ttl=64 time=5.85 ms
+[1786075616.599648] 64 bytes from 10.200.0.100: icmp_seq=65 ttl=64 time=7.58 ms
+[1786075616.794031] 64 bytes from 10.200.0.100: icmp_seq=66 ttl=64 time=0.984 ms
+[1786075616.994591] 64 bytes from 10.200.0.100: icmp_seq=67 ttl=64 time=1.16 ms
+[1786075617.195184] 64 bytes from 10.200.0.100: icmp_seq=68 ttl=64 time=1.17 ms
+[ ... 78 baris respons normal dihilangkan ... ]
+[1786075633.125369] 64 bytes from 10.200.0.100: icmp_seq=147 ttl=64 time=0.905 ms
+[1786075633.325551] 64 bytes from 10.200.0.100: icmp_seq=148 ttl=64 time=0.812 ms
+C.1.3 Log Percobaan Ketiga
+cat /root/failover_p3.log
+Hasil
+PING 10.200.0.100 (10.200.0.100) 56(84) bytes of data.
+[1786075657.623815] 64 bytes from 10.200.0.100: icmp_seq=1 ttl=64 time=5.25 ms
+[1786075657.825942] 64 bytes from 10.200.0.100: icmp_seq=2 ttl=64 time=6.66 ms
+[ ... 52 baris respons normal dihilangkan ... ]
+[1786075668.480097] 64 bytes from 10.200.0.100: icmp_seq=55 ttl=64 time=1.85 ms
+[1786075668.687266] 64 bytes from 10.200.0.100: icmp_seq=56 ttl=64 time=8.58 ms
+[1786075668.883594] 64 bytes from 10.200.0.100: icmp_seq=57 ttl=64 time=3.90 ms
+[1786075669.081228] 64 bytes from 10.200.0.100: icmp_seq=58 ttl=64 time=0.980 ms
+[1786075672.249309] 64 bytes from 10.200.0.100: icmp_seq=73 ttl=64 time=1.23 ms
+[1786075672.450147] 64 bytes from 10.200.0.100: icmp_seq=74 ttl=64 time=1.15 ms
+[1786075672.678277] 64 bytes from 10.200.0.100: icmp_seq=75 ttl=64 time=28.7 ms
+[1786075672.851618] 64 bytes from 10.200.0.100: icmp_seq=76 ttl=64 time=0.944 ms
+[ ... 79 baris respons normal dihilangkan ... ]
+[1786075688.968524] 64 bytes from 10.200.0.100: icmp_seq=156 ttl=64 time=0.929 ms
+
+
+C.1.4 Log Percobaan Keempat
+cat /root/failover_p4.log
+
+PING 10.200.0.100 (10.200.0.100) 56(84) bytes of data.
+[1786075714.615802] 64 bytes from 10.200.0.100: icmp_seq=1 ttl=64 time=0.858 ms
+[1786075714.816314] 64 bytes from 10.200.0.100: icmp_seq=2 ttl=64 time=1.09 ms
+[ ... 43 baris respons normal dihilangkan ... ]
+[1786075723.681420] 64 bytes from 10.200.0.100: icmp_seq=46 ttl=64 time=1.06 ms
+[1786075723.881723] 64 bytes from 10.200.0.100: icmp_seq=47 ttl=64 time=0.921 ms
+[1786075724.082103] 64 bytes from 10.200.0.100: icmp_seq=48 ttl=64 time=1.07 ms
+[1786075724.296906] 64 bytes from 10.200.0.100: icmp_seq=49 ttl=64 time=13.7 ms
+[1786075727.612420] 64 bytes from 10.200.0.100: icmp_seq=65 ttl=64 time=4.36 ms
+[1786075727.809928] 64 bytes from 10.200.0.100: icmp_seq=66 ttl=64 time=1.13 ms
+[1786075728.010152] 64 bytes from 10.200.0.100: icmp_seq=67 ttl=64 time=0.864 ms
+[1786075728.229898] 64 bytes from 10.200.0.100: icmp_seq=68 ttl=64 time=13.8 ms
+[ ... 75 baris respons normal dihilangkan ... ]
+[1786075743.943317] 64 bytes from 10.200.0.100: icmp_seq=144 ttl=64 time=2.20 ms
+[1786075744.144763] 64 bytes from 10.200.0.100: icmp_seq=145 ttl=64 time=2.94 ms
+C.1.5 Log Percobaan Kelima
+cat /root/failover_p5.log
+Hasilnya
+PING 10.200.0.100 (10.200.0.100) 56(84) bytes of data.
+[1786075771.074159] 64 bytes from 10.200.0.100: icmp_seq=1 ttl=64 time=0.930 ms
+[1786075771.274462] 64 bytes from 10.200.0.100: icmp_seq=2 ttl=64 time=0.912 ms
+[ ... 44 baris respons normal dihilangkan ... ]
+[1786075780.564917] 64 bytes from 10.200.0.100: icmp_seq=47 ttl=64 time=0.880 ms
+[1786075780.766671] 64 bytes from 10.200.0.100: icmp_seq=48 ttl=64 time=2.19 ms
+[1786075780.965757] 64 bytes from 10.200.0.100: icmp_seq=49 ttl=64 time=0.762 ms
+[1786075781.169032] 64 bytes from 10.200.0.100: icmp_seq=50 ttl=64 time=1.02 ms
+[1786075784.281099] 64 bytes from 10.200.0.100: icmp_seq=65 ttl=64 time=1.07 ms
+[1786075784.481667] 64 bytes from 10.200.0.100: icmp_seq=66 ttl=64 time=1.20 ms
+[1786075784.682010] 64 bytes from 10.200.0.100: icmp_seq=67 ttl=64 time=0.967 ms
+[1786075784.889259] 64 bytes from 10.200.0.100: icmp_seq=68 ttl=64 time=7.80 ms
+[ ... 83 baris respons normal dihilangkan ... ]
+[1786075801.863280] 64 bytes from 10.200.0.100: icmp_seq=152 ttl=64 time=5.98 ms
+[1786075802.074436] 64 bytes from 10.200.0.100: icmp_seq=153 ttl=64 time=16.6 ms
+
+C.2 Log Pengujian Failover Kegagalan Layanan
+Pengukuran pada pengujian ini menggunakan permintaan HTTP, berbeda dengan Lampiran C.1 yang menggunakan ping. Pengujian dilakukan sebanyak lima kali dengan menghentikan layanan Nginx pada node master, sementara sistem operasi node tersebut tetap berjalan. Pengukuran dilakukan dari node3 menggunakan permintaan HTTP berkala terhadap Virtual IP, karena kegagalan pada tingkat layanan tidak terdeteksi oleh perkakas ping. Perintah yang digunakan:
+while true; do
+  printf "%s " "$(date +%T.%3N)"
+  curl -s --max-time 2 http://10.200.0.100/ | grep -o "node[0-9]" | head -1 || echo "GAGAL"
+  sleep 0.5
+done | tee /root/failover_nginx_cfg3_pX.log
+Kegagalan dipicu pada node1 menggunakan:
+sleep 10;systemctl stop nginx; sleep 20; systemctl start nginx;sleep 20
+Waktu failover dihitung sebagai selisih waktu antara respons berhasil terakhir dari node1 dan respons berhasil pertama dari node2. Waktu pemulihan dihitung sebagai selisih antara respons terakhir dari node2 dan respons pertama dari node1 setelah layanan dijalankan kembali. Rekapitulasi hasil perhitungan:
+Percobaan
+Permintaan Gagal
+Waktu Failover
+Waktu Pemulihan
+p1
+7
+4,27 detik
+0,54 detik
+p2
+7
+4,20 detik
+0,53 detik
+p3
+11
+6,29 detik
+0,55 detik
+p4
+9
+5,25 detik
+0,54 detik
+p5
+9
+5,27 detik
+0,58 detik
+Rata-rata
+8,6
+5,06 detik
+0,55 detik
+C.2.1 Log Percobaan Pertama
+root@node3:~# cat /root/failover_nginx_cfg3_p1.log
+14:04:12.965 node1
+14:04:13.508 node1
+[ ... 14 baris respons normal dihilangkan ... ]
+14:04:21.647 node1
+14:04:22.179 node1
+14:04:22.713 node1
+14:04:23.272 node1
+14:04:23.823 14:04:24.346 14:04:24.872 14:04:25.401 14:04:25.946 14:04:26.477 14:04:27.019 14:04:27.543 node2
+14:04:28.084 node2
+14:04:28.619 node2
+14:04:29.163 node2
+[ ... 39 baris respons normal dihilangkan ... ]
+14:04:50.811 node2
+14:04:51.346 node2
+14:04:51.879 node2
+14:04:52.422 node2
+14:04:52.963 node1
+14:04:53.515 node1
+14:04:54.069 node1
+14:04:54.599 node1
+[ ... 38 baris respons normal dihilangkan ... ]
+14:05:15.577 node1
+14:05:16.108 node1
+
+C.2.2 Log Percobaan Kedua
+root@node3:~# cat /root/failover_nginx_cfg3_p2.log
+14:05:44.992 node1
+14:05:45.536 node1
+[ ... 16 baris respons normal dihilangkan ... ]
+14:05:54.633 node1
+14:05:55.162 node1
+14:05:55.692 node1
+14:05:56.222 node1
+14:05:56.751 14:05:57.275 14:05:57.802 14:05:58.326 14:05:58.847 14:05:59.371 14:05:59.895 14:06:00.419 node2
+14:06:00.966 node2
+14:06:01.510 node2
+14:06:02.045 node2
+[ ... 39 baris respons normal dihilangkan ... ]
+14:06:23.646 node2
+14:06:24.197 node2
+14:06:24.727 node2
+14:06:25.257 node2
+14:06:25.791 node1
+14:06:26.338 node1
+14:06:26.868 node1
+14:06:27.400 node1
+[ ... 27 baris respons normal dihilangkan ... ]
+14:06:42.428 node1
+14:06:42.957 node1
+
+C.2.3 Log Percobaan Ketiga
+root@node3:~# cat /root/failover_nginx_cfg3_p3.log
+14:06:53.167 node1
+14:06:53.702 node1
+[ ... 14 baris respons normal dihilangkan ... ]
+14:07:01.747 node1
+14:07:02.304 node1
+14:07:02.859 node1
+14:07:03.404 node1
+14:07:03.932 14:07:04.453 14:07:04.974 14:07:05.495 14:07:06.022 14:07:06.543 14:07:07.070 14:07:07.594 14:07:08.119 14:07:08.649 14:07:09.175 14:07:09.698 node2
+14:07:10.235 node2
+14:07:10.769 node2
+14:07:11.311 node2
+[ ... 37 baris respons normal dihilangkan ... ]
+14:07:31.807 node2
+14:07:32.337 node2
+14:07:32.873 node2
+14:07:33.407 node2
+14:07:33.959 node1
+14:07:34.495 node1
+14:07:35.025 node1
+14:07:35.554 node1
+[ ... 26 baris respons normal dihilangkan ... ]
+14:07:50.110 node1
+14:07:50.639 node1
+
+C.2.4 Log Percobaan Keempat
+root@node3:~# cat /root/failover_nginx_cfg3_p4.log
+14:16:01.853 node1
+14:16:02.407 node1
+[ ... 14 baris respons normal dihilangkan ... ]
+14:16:10.486 node1
+14:16:11.022 node1
+14:16:11.552 node1
+14:16:12.082 node1
+14:16:12.611 14:16:13.132 14:16:13.654 14:16:14.178 14:16:14.706 14:16:15.228 14:16:15.752 14:16:16.277 14:16:16.803 14:16:17.336 node2
+14:16:17.878 node2
+14:16:18.409 node2
+14:16:18.942 node2
+[ ... 37 baris respons normal dihilangkan ... ]
+14:16:39.520 node2
+14:16:40.067 node2
+14:16:40.608 node2
+14:16:41.137 node2
+14:16:41.677 node1
+14:16:42.222 node1
+14:16:42.752 node1
+14:16:43.284 node1
+[ ... 35 baris respons normal dihilangkan ... ]
+14:17:02.670 node1
+14:17:03.219 node1
+
+C.2.5 Log Percobaan Kelima
+root@node3:~# cat /root/failover_nginx_cfg3_p5.log
+14:17:13.299 node1
+14:17:13.851 node1
+[ ... 15 baris respons normal dihilangkan ... ]
+14:17:22.412 node1
+14:17:22.959 node1
+14:17:23.489 node1
+14:17:24.019 node1
+14:17:24.551 14:17:25.084 14:17:25.627 14:17:26.152 14:17:26.673 14:17:27.194 14:17:27.719 14:17:28.240 14:17:28.770 14:17:29.293 node2
+14:17:29.843 node2
+14:17:30.376 node2
+14:17:30.934 node2
+[ ... 37 baris respons normal dihilangkan ... ]
+14:17:51.499 node2
+14:17:52.061 node2
+14:17:52.592 node2
+14:17:53.129 node2
+14:17:53.712 node1
+14:17:54.268 node1
+14:17:54.810 node1
+14:17:55.342 node1
+[ ... 41 baris respons normal dihilangkan ... ]
+14:18:17.914 node1
+14:18:18.444 node1
+
+C.3 Log Verifikasi Klaster Basis Data
+Perintah yang dijalankan pada setiap node:
+clear
+mysql -u root -p -e "SELECT @@hostname AS node; SHOW STATUS LIKE 'wsrep_cluster_size'; SHOW STATUS LIKE 'wsrep_cluster_status'; SHOW STATUS LIKE 'wsrep_local_state_comment'; SHOW STATUS LIKE 'wsrep_connected'; SELECT COUNT(*) AS jumlah FROM ifjudul_simulasi.judul_ta;"
+C.3.1 Hasil pada node1
++-------+
+| node  |
++-------+
+| node1 |
++-------+
++--------------------+-------+
+| Variable_name      | Value |
++--------------------+-------+
+| wsrep_cluster_size | 3     |
++--------------------+-------+
++----------------------+---------+
+| Variable_name        | Value   |
++----------------------+---------+
+| wsrep_cluster_status | Primary |
++----------------------+---------+
++---------------------------+--------+
+| Variable_name             | Value  |
++---------------------------+--------+
+| wsrep_local_state_comment | Synced |
++---------------------------+--------+
++-----------------+-------+
+| Variable_name   | Value |
++-----------------+-------+
+| wsrep_connected | ON    |
++-----------------+-------+
++--------+
+| jumlah |
++--------+
+|   1000 |
++--------+
+C.3.2 Hasil pada node2
++-------+
+| node  |
++-------+
+| node2 |
++-------+
++--------------------+-------+
+| Variable_name      | Value |
++--------------------+-------+
+| wsrep_cluster_size | 3     |
++--------------------+-------+
++----------------------+---------+
+| Variable_name        | Value   |
++----------------------+---------+
+| wsrep_cluster_status | Primary |
++----------------------+---------+
++---------------------------+--------+
+| Variable_name             | Value  |
++---------------------------+--------+
+| wsrep_local_state_comment | Synced |
++---------------------------+--------+
++-----------------+-------+
+| Variable_name   | Value |
++-----------------+-------+
+| wsrep_connected | ON    |
++-----------------+-------+
++--------+
+| jumlah |
++--------+
+|   1000 |
++--------+
+C.3.3 	Hasil pada node3
++-------+
+| node  |
++-------+
+| node3 |
++-------+
++--------------------+-------+
+| Variable_name      | Value |
++--------------------+-------+
+| wsrep_cluster_size | 3     |
++--------------------+-------+
++----------------------+---------+
+| Variable_name        | Value   |
++----------------------+---------+
+| wsrep_cluster_status | Primary |
++----------------------+---------+
++---------------------------+--------+
+| Variable_name             | Value  |
++---------------------------+--------+
+| wsrep_local_state_comment | Synced |
++---------------------------+--------+
++-----------------+-------+
+| Variable_name   | Value |
++-----------------+-------+
+| wsrep_connected | ON    |
++-----------------+-------+
++--------+
+| jumlah |
++--------+
+|   1000 |
++--------+
+C.4 	Log Pelaksanaan Pencadangan
+Pencadangan dijalankan menggunakan skrip pada Lampiran A.6, dengan penjadwalan melalui cron:
+#
+# m h  dom mon dow   command
+0 7 * * * /usr/local/bin/backup_galera.sh
+----- direktori hasil pencadangan -----
+total 28K
+drwxr-xr-x 6 root root 4.0K Aug  7 10:58 20260807_105756
+drwxr-xr-x 6 root root 4.0K Aug  8 07:00 20260808_070001
+drwxr-xr-x 6 root root 4.0K Aug  9 07:00 20260809_070001
+drwxr-xr-x 6 root root 4.0K Aug 10 07:00 20260810_070001
+drwxr-xr-x 6 root root 4.0K Aug 11 07:00 20260811_070001
+drwxr-xr-x 6 root root 4.0K Aug 12 07:00 20260812_070001
+drwxr-xr-x 6 root root 4.0K Aug 13 07:00 20260813_070001
+Keluaran proses pencadangan:
+[00] 2026-08-13 07:00:07 All tables unlocked
+[00] 2026-08-13 07:00:07 Backup created in directory '/var/backup/mariadb/20260813_070001/'
+[00] 2026-08-13 07:00:07 Writing backup-my.cnf
+[ ... 5 baris respons normal dihilangkan ... ]
+mariabackup based on MariaDB server 10.11.14-MariaDB debian-linux-gnu (x86_64)
+[ ... 15 baris respons normal dihilangkan ... ]
+2026-08-13  7:00:07 0 [Note] InnoDB: Compressed tables use zlib 1.3
+2026-08-13  7:00:07 0 [Note] InnoDB: Using transactional memory
+2026-08-13  7:00:07 0 [Note] InnoDB: Number of transaction pools: 1
+2026-08-13  7:00:07 0 [Note] InnoDB: Using crc32 + pclmulqdq instructions
+2026-08-13  7:00:07 0 [Note] InnoDB: Using io_uring
+2026-08-13  7:00:07 0 [Note] InnoDB: innodb_buffer_pool_size_max=96m, innodb_buffer_pool_size=96m
+2026-08-13  7:00:07 0 [Note] InnoDB: Completed initialization of buffer pool
+2026-08-13  7:00:07 0 [Note] InnoDB: Memory-mapped log (block size=512 bytes)
+2026-08-13  7:00:07 0 [Note] InnoDB: Starting crash recovery from checkpoint LSN=444268
+2026-08-13  7:00:07 0 [Note] InnoDB: End of log at LSN=449829
+2026-08-13  7:00:07 0 [Note] InnoDB: To recover: 4 pages
+2026-08-13  7:00:07 0 [Note] InnoDB: Buffered log writes (block size=512 bytes)
+[ ... 2 baris respons normal dihilangkan ... ]
+
+[00] 2026-08-13 07:00:08 completed OK!
+C.5 	Bukti Pengamatan Lalu Lintas Jaringan
+Pengamatan Pembungkusan VXLAN
+Perintah yang dijalankan pada node1:
+tcpdump -ni eth1 'udp port 4789 and host 10.10.35.92' -c 30 | grep -B1 VRRPv2
+Hasil :
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on eth1, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+21:36:35.839455 IP 10.10.33.75.36733 > 10.10.35.92.4789: VXLAN, flags [I] (0x08), vni 100
+IP 10.200.0.1 > 10.200.0.2: VRRPv2, Advertisement, vrid 51, prio 200, authtype simple, intvl 1s, length 20
+30 packets captured
+48 packets received by filter
+0 packets dropped by kernel
+--
+21:36:36.839641 IP 10.10.33.75.36733 > 10.10.35.92.4789: VXLAN, flags [I] (0x08), vni 100
+IP 10.200.0.1 > 10.200.0.2: VRRPv2, Advertisement, vrid 51, prio 200, authtype simple, intvl 1s, length 20
+
+Pengamatan Penyaringan ARP terhadap Virtual IP
+Perintah pada node1:
+tcpdump -ni eth1 'arp and (host 10.10.35.92 or host 10.200.0.100)'
+Perintah pada node2:
+ip neigh flush all
+ping -c 3 10.10.33.75
+ping -c 3 10.200.0.100
+Hasil pengamatan pada node1:
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on eth1, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+21:38:01.932431 ARP, Request who-has 10.10.33.75 tell 10.10.35.92, length 46
+21:38:01.932455 ARP, Reply 10.10.33.75 is-at 02:00:0a:0a:21:4b, length 28
+21:38:02.084430 ARP, Request who-has 10.10.33.102 tell 10.10.35.92, length 46
+3 packets captured
+4 packets received by filter
+0 packets dropped by kernel
+
+C.6 	Log Pengujian Pengaruh Penyetelan Parameter
+Pengujian tambahan dilakukan untuk mengetahui pengaruh selang pemeriksaan kesehatan dan selang advertisement VRRP terhadap waktu failover layanan. Dua konfigurasi parameter diuji, masing-masing sebanyak lima kali percobaan, menggunakan metode pengukuran yang sama dengan Lampiran C.2. Konfigurasi ketiga tidak diuji ulang pada lampiran ini karena hasilnya telah tercatat pada Lampiran C.2.
+Perubahan parameter dilakukan pada node1 dan node2 melalui berkas /etc/keepalived/keepalived.conf, kemudian layanan dimuat ulang menggunakan:
+systemctl restart keepalived
+
+Konfigurasi yang diuji:
+Konfigurasi
+Selang Pemeriksaan
+Selang Advertisement
+Berkas Log
+1
+2 detik
+1 detik
+failover_cfg1_p1-p5.log
+2
+1 detik
+1 detik
+failover_cfg2_p1-p5.log
+
+Rekapitulasi hasil perhitungan:
+Konfigurasi
+p1
+p2
+p3
+p4
+p5
+Rata-rata
+1
+6,84
+6,90
+6,32
+6,84
+6,35
+6,65 Detik
+2
+5,25
+4,76
+4,78
+4,83
+4,74
+4,87 Detik
+
+C.6.1 Log Konfigurasi Pertama
+root@node3:~# for f in /root/failover_cfg1_p*.log; do echo "===== $f ====="; cat "$f"; done
+===== /root/failover_cfg1_p1.log =====
+14:31:01.121 node1
+14:31:01.681 node1
+14:31:02.215 node1
+[ ... 13 baris respons normal dihilangkan ... ]
+14:31:09.687 node1
+14:31:10.259 node1
+14:31:10.796 node1
+14:31:11.330 node1
+14:31:11.859 14:31:12.382 14:31:12.905 14:31:13.427 14:31:13.953 14:31:14.475 14:31:14.996 14:31:15.519 14:31:16.057 14:31:16.588 14:31:17.115 14:31:17.640 14:31:18.168 node2
+14:31:18.710 node2
+14:31:19.253 node2
+14:31:19.794 node2
+[ ... 39 baris respons normal dihilangkan ... ]
+14:31:41.381 node2
+14:31:41.916 node2
+14:31:42.459 node2
+14:31:43.007 node2
+14:31:43.539 node1
+14:31:44.091 node1
+14:31:44.623 node1
+14:31:45.159 node1
+[ ... 32 baris respons normal dihilangkan ... ]
+14:32:03.004 node1
+14:32:03.537 node1
+14:32:04.074 node1
+14:32:04.624 node1
+14:32:05.164 ===== /root/failover_cfg1_p2.log =====
+14:32:48.962 node1
+14:32:49.514 node1
+14:32:50.044 node1
+14:32:50.577 node1
+[ ... 12 baris respons normal dihilangkan ... ]
+14:32:57.593 node1
+14:32:58.140 node1
+14:32:58.672 node1
+14:32:59.204 node1
+14:32:59.747 14:33:00.271 14:33:00.794 14:33:01.321 14:33:01.846 14:33:02.385 14:33:02.910 14:33:03.454 14:33:03.982 14:33:04.518 14:33:05.062 14:33:05.584 14:33:06.108 node2
+14:33:06.645 node2
+14:33:07.182 node2
+14:33:07.718 node2
+[ ... 35 baris respons normal dihilangkan ... ]
+14:33:27.139 node2
+14:33:27.672 node2
+14:33:28.214 node2
+14:33:28.769 node2
+14:33:29.323 node1
+14:33:29.858 node1
+14:33:30.390 node1
+14:33:30.925 node1
+[ ... 38 baris respons normal dihilangkan ... ]
+14:33:52.022 node1
+14:33:52.556 node1
+===== /root/failover_cfg1_p3.log =====
+14:34:17.733 node1
+14:34:18.295 node1
+14:34:18.828 node1
+[ ... 13 baris respons normal dihilangkan ... ]
+14:34:26.343 node1
+14:34:26.872 node1
+14:34:27.412 node1
+14:34:27.964 node1
+14:34:28.522 14:34:29.047 14:34:29.568 14:34:30.088 14:34:30.612 14:34:31.137 14:34:31.658 14:34:32.182 14:34:32.704 14:34:33.234 14:34:33.758 14:34:34.284 node2
+14:34:34.818 node2
+14:34:35.363 node2
+14:34:35.919 node2
+[ ... 38 baris respons normal dihilangkan ... ]
+14:34:56.990 node2
+14:34:57.542 node2
+14:34:58.071 node2
+14:34:58.601 node2
+14:34:59.142 node1
+14:34:59.697 node1
+14:35:00.234 node1
+14:35:00.768 node1
+[ ... 36 baris respons normal dihilangkan ... ]
+14:35:20.743 node1
+14:35:21.271 node1
+===== /root/failover_cfg1_p4.log =====
+14:35:40.988 node1
+14:35:41.524 node1
+14:35:42.063 node1
+[ ... 13 baris respons normal dihilangkan ... ]
+14:35:49.577 node1
+14:35:50.109 node1
+14:35:50.649 node1
+14:35:51.180 node1
+14:35:51.709 14:35:52.245 14:35:52.765 14:35:53.294 14:35:53.817 14:35:54.342 14:35:54.865 14:35:55.401 14:35:55.925 14:35:56.446 14:35:56.967 14:35:57.488 14:35:58.022 node2
+14:35:58.558 node2
+14:35:59.092 node2
+14:35:59.664 node2
+[ ... 38 baris respons normal dihilangkan ... ]
+14:36:20.777 node2
+14:36:21.311 node2
+14:36:21.849 node2
+14:36:22.381 node2
+14:36:22.926 node1
+14:36:23.463 node1
+14:36:24.002 node1
+14:36:24.533 node1
+[ ... 45 baris respons normal dihilangkan ... ]
+14:36:49.374 node1
+14:36:49.918 node1
+===== /root/failover_cfg1_p5.log =====
+14:37:03.096 node1
+14:37:03.637 node1
+14:37:04.180 node1
+[ ... 13 baris respons normal dihilangkan ... ]
+14:37:11.687 node1
+14:37:12.226 node1
+14:37:12.758 node1
+14:37:13.300 node1
+14:37:13.840 14:37:14.359 14:37:14.880 14:37:15.410 14:37:15.937 14:37:16.460 14:37:17.000 14:37:17.524 14:37:18.049 14:37:18.580 14:37:19.123 14:37:19.645 node2
+14:37:20.213 node2
+14:37:20.743 node2
+14:37:21.278 node2
+[ ... 39 baris respons normal dihilangkan ... ]
+14:37:42.901 node2
+14:37:43.432 node2
+14:37:43.961 node2
+14:37:44.494 node2
+14:37:45.023 node1
+14:37:45.556 node1
+14:37:46.089 node1
+14:37:46.619 node1
+[ ... 34 baris respons normal dihilangkan ... ]
+14:38:05.546 node1
+14:38:06.079 node1
+
+C.6.2 Log Konfigurasi Kedua
+root@node3:~# for f in /root/failover_cfg2_p*.log; do echo "===== $f ====="; cat "$f"; done
+===== /root/failover_cfg2_p1.log =====
+14:41:36.233 node1
+14:41:36.779 node1
+14:41:37.321 node1
+[ ... 14 baris respons normal dihilangkan ... ]
+14:41:45.405 node1
+14:41:45.935 node1
+14:41:46.468 node1
+14:41:46.999 node1
+14:41:47.538 14:41:48.059 14:41:48.582 14:41:49.112 14:41:49.642 14:41:50.163 14:41:50.687 14:41:51.210 14:41:51.732 14:41:52.252 node2
+14:41:52.806 node2
+14:41:53.338 node2
+14:41:53.867 node2
+[ ... 37 baris respons normal dihilangkan ... ]
+14:42:14.353 node2
+14:42:14.889 node2
+14:42:15.424 node2
+14:42:15.959 node2
+14:42:16.492 node1
+14:42:17.033 node1
+14:42:17.566 node1
+14:42:18.107 node1
+[ ... 35 baris respons normal dihilangkan ... ]
+14:42:37.402 node1
+14:42:37.937 node1
+===== /root/failover_cfg2_p2.log =====
+14:43:28.666 node1
+14:43:29.200 node1
+14:43:29.755 node1
+[ ... 14 baris respons normal dihilangkan ... ]
+14:43:37.771 node1
+14:43:38.299 node1
+14:43:38.831 node1
+14:43:39.372 node1
+14:43:39.913 14:43:40.435 14:43:40.956 14:43:41.478 14:43:42.003 14:43:42.524 14:43:43.053 14:43:43.590 14:43:44.130 node2
+14:43:44.700 node2
+14:43:45.233 node2
+14:43:45.774 node2
+[ ... 37 baris respons normal dihilangkan ... ]
+14:44:06.264 node2
+14:44:06.829 node2
+14:44:07.359 node2
+14:44:07.918 node2
+14:44:08.457 node1
+14:44:08.998 node1
+14:44:09.531 node1
+14:44:10.068 node1
+[ ... 54 baris respons normal dihilangkan ... ]
+14:44:39.759 node1
+14:44:40.287 node1
+===== /root/failover_cfg2_p3.log =====
+14:45:00.980 node1
+14:45:01.523 node1
+14:45:02.065 node1
+[ ... 13 baris respons normal dihilangkan ... ]
+14:45:09.620 node1
+14:45:10.154 node1
+14:45:10.686 node1
+14:45:11.220 node1
+14:45:11.750 14:45:12.271 14:45:12.793 14:45:13.318 14:45:13.839 14:45:14.373 14:45:14.910 14:45:15.431 14:45:15.999 node2
+14:45:16.537 node2
+14:45:17.073 node2
+14:45:17.615 node2
+[ ... 49 baris respons normal dihilangkan ... ]
+14:45:44.497 node2
+14:45:45.051 node2
+14:45:45.586 node2
+14:45:46.119 node2
+14:45:46.673 node1
+14:45:47.225 node1
+14:45:47.764 node1
+14:45:48.295 node1
+[ ... 37 baris respons normal dihilangkan ... ]
+14:46:08.673 node1
+14:46:09.206 node1
+===== /root/failover_cfg2_p4.log =====
+14:46:23.340 node1
+14:46:23.871 node1
+14:46:24.412 node1
+[ ... 14 baris respons normal dihilangkan ... ]
+14:46:32.480 node1
+14:46:33.021 node1
+14:46:33.555 node1
+14:46:34.093 node1
+14:46:34.655 14:46:35.175 14:46:35.698 14:46:36.265 14:46:36.787 14:46:37.307 14:46:37.857 14:46:38.401 14:46:38.921 node2
+14:46:39.473 node2
+14:46:40.005 node2
+14:46:40.545 node2
+[ ... 39 baris respons normal dihilangkan ... ]
+14:47:02.018 node2
+14:47:02.563 node2
+14:47:03.096 node2
+14:47:03.627 node2
+14:47:04.158 node1
+14:47:04.698 node1
+14:47:05.243 node1
+14:47:05.788 node1
+[ ... 40 baris respons normal dihilangkan ... ]
+14:47:27.728 node1
+14:47:28.255 node1
+===== /root/failover_cfg2_p5.log =====
+14:47:43.159 node1
+14:47:43.720 node1
+14:47:44.255 node1
+[ ... 13 baris respons normal dihilangkan ... ]
+14:47:51.736 node1
+14:47:52.279 node1
+14:47:52.814 node1
+14:47:53.357 node1
+14:47:53.900 14:47:54.420 14:47:54.946 14:47:55.471 14:47:55.993 14:47:56.516 14:47:57.039 14:47:57.565 14:47:58.092 node2
+14:47:58.645 node2
+14:47:59.176 node2
+14:47:59.713 node2
+[ ... 39 baris respons normal dihilangkan ... ]
+14:48:21.276 node2
+14:48:21.849 node2
+14:48:22.377 node2
+14:48:22.909 node2
+14:48:23.448 node1
+14:48:23.990 node1
+14:48:24.521 node1
+14:48:25.054 node1
+[ ... 35 baris respons normal dihilangkan ... ]
+14:48:44.377 node1

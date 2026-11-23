@@ -1,0 +1,14 @@
+# Sandi & berkas lokal
+.env
+*.local
+*.key
+*.pem
+
+# Hasil backup / dump
+*.sql.gz
+backup/
+
+# Sistem
+.DS_Store
+Thumbs.db
+.claude/

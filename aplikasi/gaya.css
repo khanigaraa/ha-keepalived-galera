@@ -1,0 +1,186 @@
+:root {
+  --biru-tua: #0b2a5b;
+  --biru: #14498f;
+  --garis: #dfe4ec;
+  --abu: #f5f7fa;
+  --teks: #23272f;
+  --redup: #6b7280;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--abu);
+  color: var(--teks);
+  font-size: 15px;
+}
+
+header.utama {
+  background: var(--biru-tua);
+  color: #fff;
+  padding: 28px 24px;
+}
+
+header.utama h1 {
+  margin: 0;
+  font-size: 26px;
+  letter-spacing: 0.3px;
+}
+
+header.utama p {
+  margin: 6px 0 0;
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+nav.tautan {
+  background: var(--biru);
+  padding: 10px 24px;
+}
+
+nav.tautan a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+nav.tautan a:hover { text-decoration: underline; }
+
+main {
+  max-width: 1180px;
+  margin: 24px auto 90px;
+  padding: 0 20px;
+}
+
+.kartu {
+  background: #fff;
+  border: 1px solid var(--garis);
+  border-radius: 8px;
+  padding: 22px;
+}
+
+.baris-alat {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  color: var(--redup);
+  margin-bottom: 5px;
+}
+
+input[type="text"], input[type="number"], select, textarea {
+  padding: 8px 11px;
+  border: 1px solid var(--garis);
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: inherit;
+  width: 100%;
+}
+
+textarea { resize: vertical; min-height: 78px; }
+
+button, .tombol {
+  background: var(--biru);
+  color: #fff;
+  border: 0;
+  border-radius: 5px;
+  padding: 9px 18px;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+button:hover, .tombol:hover { background: var(--biru-tua); }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+thead th {
+  background: var(--biru-tua);
+  color: #fff;
+  text-align: left;
+  padding: 11px 10px;
+  font-size: 12.5px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+thead th a { color: #fff; text-decoration: none; }
+thead th a:hover { text-decoration: underline; }
+
+tbody td {
+  padding: 11px 10px;
+  border-bottom: 1px solid var(--garis);
+  vertical-align: top;
+}
+
+tbody tr:nth-child(even) { background: #fafbfd; }
+
+.halaman {
+  margin-top: 18px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+
+.halaman a, .halaman span.kini {
+  padding: 6px 11px;
+  border: 1px solid var(--garis);
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--teks);
+  background: #fff;
+}
+
+.halaman span.kini {
+  background: var(--biru);
+  color: #fff;
+  border-color: var(--biru);
+}
+
+.ket-jumlah { color: var(--redup); margin-right: auto; }
+
+.pesan {
+  padding: 11px 14px;
+  border-radius: 5px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.pesan.sukses { background: #e7f6ec; border: 1px solid #b7e0c4; }
+.pesan.galat  { background: #fdecec; border: 1px solid #f3bcbc; }
+
+/* Bilah penanda diagnostik */
+.diagnostik {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  background: #101725;
+  color: #e6edf7;
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 13px;
+  padding: 9px 20px;
+  display: flex;
+  gap: 26px;
+  flex-wrap: wrap;
+  border-top: 3px solid var(--biru);
+}
+
+.diagnostik b { color: #7fd4a0; font-weight: 600; }
+.diagnostik .cap { color: #94a3b8; }

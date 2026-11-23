@@ -1,0 +1,18 @@
+[Unit]
+Description=VXLAN overlay untuk klaster HA
+After=network-online.target
+Wants=network-online.target
+Before=keepalived.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/sbin/ip link add vxlan0 type vxlan id 100 dev eth1 dstport 4789 local 10.10.35.92
+ExecStart=/usr/sbin/bridge fdb append 00:00:00:00:00:00 dev vxlan0 dst 10.10.33.75
+ExecStart=/usr/sbin/bridge fdb append 00:00:00:00:00:00 dev vxlan0 dst 10.10.33.102
+ExecStart=/usr/sbin/ip addr add 10.200.0.2/24 dev vxlan0
+ExecStart=/usr/sbin/ip link set vxlan0 up
+ExecStop=/usr/sbin/ip link del vxlan0
+
+[Install]
+WantedBy=multi-user.target
