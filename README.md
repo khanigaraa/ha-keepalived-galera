@@ -48,7 +48,7 @@ Proyek ini membangun penggantinya di **tiga VPS**:
 
 Hal yang paling menarik: jaringan penyedia cloud **menyaring ARP ke Virtual IP**, sehingga failover biasa tidak jalan. Solusinya adalah membangun **overlay VXLAN** dan menjalankan VRRP di dalamnya. Ceritanya lengkap di [docs/VXLAN.md](docs/VXLAN.md).
 
-- **Status:** arsip penelitian skripsi (2026). Repo ini mendokumentasikan sistem seperti saat diuji.
+- **Status:** arsip penelitian skripsi (2026). Ketiga VPS uji sudah dimatikan setelah penelitian selesai, jadi tidak ada demo live. Repo ini mendokumentasikan sistem seperti saat diuji, dan bisa dipasang ulang lewat [panduan pemasangan](docs/PANDUAN-PEMASANGAN.md).
 - **Aplikasi:** replika simulasi dengan data buatan. Semua kata sandi sudah diganti placeholder.
 
 ## Hasil pengujian
