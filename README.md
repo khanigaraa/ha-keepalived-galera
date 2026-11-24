@@ -22,20 +22,18 @@
 </p>
 
 ```mermaid
-flowchart TB
-  U([Pengguna]) --> VIP["Virtual IP 10.200.0.100<br/>dipegang node MASTER"]
-  subgraph OV ["Overlay VXLAN 10.200.0.0/24 · VNI 100"]
-    direction LR
-    N1["node1 · MASTER<br/>Nginx + PHP-FPM<br/>Keepalived prio 200"]
-    N2["node2 · BACKUP<br/>Nginx + PHP-FPM<br/>Keepalived prio 100"]
-    N3["node3<br/>Prometheus + Grafana<br/>backup harian"]
-    DB1[(Galera)] <--> DB2[(Galera)] <--> DB3[(Galera)]
-    N1 --- DB1
-    N2 --- DB2
-    N3 --- DB3
+flowchart LR
+  U([Pengguna]) --> VIP["Virtual IP<br/>10.200.0.100"]
+  VIP -->|normal| N1
+  VIP -.->|failover| N2
+  subgraph OV ["Overlay VXLAN 10.200.0.0/24"]
+    N1["node1 · MASTER<br/>Nginx + PHP + Galera"]
+    N2["node2 · BACKUP<br/>Nginx + PHP + Galera"]
+    N3["node3<br/>Galera + Prometheus<br/>+ backup harian"]
   end
-  VIP --> N1
-  VIP -. failover .-> N2
+  N1 <-->|replikasi sinkron| N2
+  N2 <--> N3
+  N1 <--> N3
 ```
 
 ## Tentang
